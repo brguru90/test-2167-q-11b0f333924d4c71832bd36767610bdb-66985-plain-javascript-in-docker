@@ -1,11 +1,173 @@
 ﻿<!doctype html>
 <html>
-  <head>  
-    <script src="env.js"></script>
-    <script src="index.js"></script>
-  </head>
-  <body onload="renderDynamicContent()">
-    <h1>Hello World</h1>
-    <div id="dynamic-content"></div>
-  </body>
+
+<head>
+  <script src="env.js"></script>
+  <script src="index.js"></script>
+  <style>
+    body {
+      width: 100%;
+      min-height: 100vh;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+    }
+
+    .submit,
+    .suggestion_box,
+    .tab-containe {
+      display: none;
+    }
+
+    .search_form {
+      position: relative;
+      background-color: rgba(255, 255, 255, 0.466);
+      padding: 50px;
+    }
+
+    .suggestion_box {}
+
+    .tabs {
+      width: calc(100% - 100px);
+      flex-grow: 1;
+      background-color: rgba(255, 255, 255, 0.91);
+      padding: 50px;
+    }
+
+    .tabs .tab-menu {
+      display: flex;
+      flex-direction: row;
+      column-gap: 10px;
+      cursor: pointer;
+    }
+
+    .tab-container {
+      display: flex !important;
+      flex-direction: row;
+      column-gap: 26px;
+    }
+
+    .tab-container div {
+      flex: 1 1;
+    }
+
+    div.tab-image {
+      flex: 2 2;
+    }
+
+    div.tab-description {
+      flex: 3 3;
+    }
+
+    .tab-image {
+      width: 200px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    input[type="search"]::-webkit-search-cancel-button {
+      display: none;
+    }
+
+    form {
+      display: flex;
+      flex-direction: row;
+
+    }
+
+    .weather {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      display: flex;
+      flex-direction: row;
+      column-gap: 5px;
+      align-items: center;
+    }
+    #dynamic-content{
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body onload="renderDynamicContent()">
+  <template>
+    <div class="tab-container">
+      <div class="tab-image"></div>
+      <div class="tab-description">
+        <h2></h2>
+        <div class="stars"></div>
+        <p></p>
+      </div>
+      <div class="opens-at">
+        Opens At:<div></div>
+      </div>
+      <div class="closes-at">
+        Closes At: <div></div>
+      </div>
+      <div class="entry-fee">
+        Price: <div></div>
+      </div>
+    </div>
+  </template>
+
+  <div id="dynamic-content">
+    <div class="container">
+
+      <div class="weather" id="weather-data">
+        <img />
+        <div class="temp"></div>
+        <div class="desc"></div>
+      </div>
+
+      <h1 class="title city-name"> </h1>
+
+      <div class="search_form">
+        <form onsubmit="search(this);return false;" method="get" action="#">
+          <input id="search-input" type="search" onchange="search()" onkeyup="search()" class="search_input"
+            value="new delhi" />
+          <input type="submit" class="submit" id="btn-submit" value="search" />
+        </form>
+        <div class="suggestion_box">
+          <div onclick="search(this,'places');return false;"> <b></b> Places </div>
+          <div onclick="search(this,'hotels');return false;"> <b></b> Hotels </div>
+          <div onclick="search(this,'restaurants');return false;"> <b></b> restorents </div>
+          <div onclick="search(this,'offices');return false;"> <b></b> Offices </div>
+        </div>
+      </div>
+      <br /><br /><br /><br />
+
+      <div class="tabs">
+        <div class="tab-menu">
+          <div id="places" class="places" onclick="tabClick('places')">
+            Places
+          </div>
+          <div  id="hotels" class="hotels" onclick="tabClick('hotels')">
+            Hotels
+          </div>
+          <div id="restaurants" class="restaurants" onclick="tabClick('restaurants')">
+            Restorents
+          </div>
+          <div id="offices" class="offices" onclick="tabClick('offices')">
+            Offices
+          </div>
+        </div>
+        <div class="tab-contents">
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+</body>
+
 </html>
